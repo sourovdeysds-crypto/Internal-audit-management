@@ -1,1 +1,81 @@
-export type UserRole = 'admin' | 'auditor' | 'manager' | 'staff';\n\nexport interface Profile {\n  id: string;\n  full_name: string;\n  email: string;\n  role: UserRole;\n  created_at: string;\n}\n\nexport interface Audit {\n  id: string;\n  audit_no: string;\n  title: string;\n  company?: string;\n  department?: string;\n  audit_type?: string;\n  auditor?: string;\n  start_date?: string;\n  end_date?: string;\n  audit_period?: string;\n  objective?: string;\n  scope?: string;\n  risk_level?: string;\n  status: string;\n  created_by: string;\n  created_at: string;\n  updated_at: string;\n}\n\nexport interface Finding {\n  id: string;\n  audit_id: string;\n  finding_no: string;\n  title: string;\n  criteria?: string;\n  condition_text?: string;\n  root_cause?: string;\n  risk_impact?: string;\n  financial_impact?: number;\n  risk_rating?: string;\n  recommendation?: string;\n  management_response?: string;\n  responsible_person?: string;\n  target_date?: string;\n  status: string;\n  created_at: string;\n  updated_at: string;\n}\n\nexport const AUDIT_TYPES = [\n  'Process Audit',\n  'Payroll Audit',\n  'Inventory Audit',\n  'Voucher Audit',\n  'Procurement Audit',\n  'Cash Audit',\n  'Bank Audit',\n  'Compliance Audit',\n  'Special Investigation',\n] as const;\n\nexport const AUDIT_STATUSES = [\n  'Planned',\n  'Ongoing',\n  'Completed',\n  'On Hold',\n] as const;\n\nexport const RISK_LEVELS = [\n  'High',\n  'Medium',\n  'Low',\n] as const;\n\nexport const FINDING_STATUSES = [\n  'Open',\n  'Management Response Pending',\n  'In Progress',\n  'Closed',\n] as const;\n
+export type UserRole = 'admin' | 'auditor' | 'manager' | 'staff';
+
+export interface Profile {
+  id: string;
+  full_name: string;
+  email: string;
+  role: UserRole;
+  created_at: string;
+}
+
+export interface Audit {
+  id: string;
+  audit_no: string;
+  title: string;
+  company?: string;
+  department?: string;
+  audit_type?: string;
+  auditor?: string;
+  start_date?: string;
+  end_date?: string;
+  audit_period?: string;
+  objective?: string;
+  scope?: string;
+  risk_level?: string;
+  status: string;
+  created_by: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Finding {
+  id: string;
+  audit_id: string;
+  finding_no: string;
+  title: string;
+  criteria?: string;
+  condition_text?: string;
+  root_cause?: string;
+  risk_impact?: string;
+  financial_impact?: number;
+  risk_rating?: string;
+  recommendation?: string;
+  management_response?: string;
+  responsible_person?: string;
+  target_date?: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export const AUDIT_TYPES = [
+  'Process Audit',
+  'Payroll Audit',
+  'Inventory Audit',
+  'Voucher Audit',
+  'Procurement Audit',
+  'Cash Audit',
+  'Bank Audit',
+  'Compliance Audit',
+  'Special Investigation',
+] as const;
+
+export const AUDIT_STATUSES = [
+  'Planned',
+  'Ongoing',
+  'Completed',
+  'On Hold',
+] as const;
+
+export const RISK_LEVELS = [
+  'High',
+  'Medium',
+  'Low',
+] as const;
+
+export const FINDING_STATUSES = [
+  'Open',
+  'Management Response Pending',
+  'In Progress',
+  'Closed',
+] as const;

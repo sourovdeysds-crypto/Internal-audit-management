@@ -27,7 +27,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={user ? <Navigate to="/dashboard" /> : <Login />}
+          element={user ? <Navigate to="/dashboard" replace /> : <Login />}
         />
 
         <Route
@@ -75,7 +75,7 @@ function App() {
           }
         />
 
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

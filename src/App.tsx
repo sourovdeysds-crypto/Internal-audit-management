@@ -1,1 +1,84 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';\nimport { useAuth } from './lib/auth';\nimport { Login } from './pages/Login';\nimport { Dashboard } from './pages/Dashboard';\nimport { Audits } from './pages/Audits';\nimport { AuditDetail } from './pages/AuditDetail';\nimport { Findings } from './pages/Findings';\nimport { Settings } from './pages/Settings';\nimport { ProtectedRoute } from './components/ProtectedRoute';\n\nfunction App() {\n  const { user, loading } = useAuth();\n\n  if (loading) {\n    return (\n      <div className=\"flex items-center justify-center min-h-screen bg-gray-100\">\n        <div className=\"text-center\">\n          <div className=\"animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mx-auto\"></div>\n          <p className=\"mt-4 text-gray-600 font-medium\">Initializing...</p>\n        </div>\n      </div>\n    );\n  }\n\n  return (\n    <Router>\n      <Routes>\n        {/* Public Routes */}\n        <Route path=\"/\" element={user ? <Navigate to=\"/dashboard\" /> : <Login />} />\n\n        {/* Protected Routes */}\n        <Route\n          path=\"/dashboard\"\n          element={\n            <ProtectedRoute>\n              <Dashboard />\n            </ProtectedRoute>\n          }\n        />\n        <Route\n          path=\"/audits\"\n          element={\n            <ProtectedRoute>\n              <Audits />\n            </ProtectedRoute>\n          }\n        />\n        <Route\n          path=\"/audits/:id\"\n          element={\n            <ProtectedRoute>\n              <AuditDetail />\n            </ProtectedRoute>\n          }\n        />\n        <Route\n          path=\"/findings\"\n          element={\n            <ProtectedRoute>\n              <Findings />\n            </ProtectedRoute>\n          }\n        />\n        <Route\n          path=\"/settings\"\n          element={\n            <ProtectedRoute>\n              <Settings />\n            </ProtectedRoute>\n          }\n        />\n\n        {/* Catch all */}\n        <Route path=\"*\" element={<Navigate to=\"/\" />} />\n      </Routes>\n    </Router>\n  );\n}\n\nexport default App;\n
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './lib/auth';
+import { Login } from './pages/Login';
+import { Dashboard } from './pages/Dashboard';
+import { Audits } from './pages/Audits';
+import { AuditDetail } from './pages/AuditDetail';
+import { Findings } from './pages/Findings';
+import { Settings } from './pages/Settings';
+import { ProtectedRoute } from './components/ProtectedRoute';
+
+function App() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600 font-medium">Initializing...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={user ? <Navigate to="/dashboard" /> : <Login />}
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/audits"
+          element={
+            <ProtectedRoute>
+              <Audits />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/audits/:id"
+          element={
+            <ProtectedRoute>
+              <AuditDetail />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/findings"
+          element={
+            <ProtectedRoute>
+              <Findings />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
